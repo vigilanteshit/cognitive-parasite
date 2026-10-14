@@ -14,6 +14,14 @@ from interactions. Its two memory systems are the central contribution:
 semantic memory captures what is known, while episodic memory records what
 happened, in which context, and which action was taken.
 
+## Interface
+
+![The Data Parasite interface: comic artwork surrounds a dark glass conversation workspace, a model selector, and semantic and episodic knowledge-graph panels.](docs/frontend.jpg)
+
+The interface keeps conversations, source evidence and memory relationships
+within reach. This screenshot shows the local demo; empty graph panels display
+the memory structure until the session contains stored records.
+
 ## Architecture
 
 ![Cognitive architecture: a supervisor retrieves from semantic and episodic Neo4j knowledge graphs, generates an answer, and learns relevant user knowledge through versioned memory updates.](docs/architecture.svg)

@@ -1,87 +1,160 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="1010" viewBox="0 0 1280 1010" role="img" aria-labelledby="title description">
-  <title id="title">Cognitive architecture for industrial knowledge retention</title>
-  <desc id="description">A supervisor retrieves evidence from two Neo4j knowledge graphs. Semantic memory connects document chunks, documents and keywords. Episodic memory connects experiences, states, actions and successive versions. Answers use retrieved evidence; the learning pipeline scores and categorizes new user knowledge and writes it to episodic memory. Model profiles and bounded execution support the workflow.</desc>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1200" viewBox="0 0 1600 1200" role="img" aria-labelledby="title description">
+  <title id="title">The Data Parasite: cognitive memory architecture</title>
+  <desc id="description">Industrial documents enter semantic memory. A supervisor coordinates direct answers and retrieval from semantic and episodic Neo4j knowledge graphs. Semantic memory links chunks to documents and keywords. Episodic memory links experiences to states, states to actions, and earlier versions to successors. Retrieved evidence supports answers. Relevant new user knowledge enters a learning pipeline that scores, categorizes, creates and updates episodic memory. Model profiles, bounded execution and persistent LangGraph checkpoints support the workflow.</desc>
   <defs>
-    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#526967"/></marker>
-    <marker id="learning-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#9d642d"/></marker>
+    <linearGradient id="ink" x2="1" y2="1"><stop stop-color="#121b35"/><stop offset=".55" stop-color="#14213b"/><stop offset="1" stop-color="#251c3d"/></linearGradient>
+    <linearGradient id="glass" x2="1" y2="1"><stop stop-color="#584267" stop-opacity=".72"/><stop offset=".45" stop-color="#1c2948"/><stop offset="1" stop-color="#69446c" stop-opacity=".65"/></linearGradient>
+    <linearGradient id="semantic" x2="1" y2="1"><stop stop-color="#254568"/><stop offset=".55" stop-color="#172641"/><stop offset="1" stop-color="#473562"/></linearGradient>
+    <linearGradient id="episodic" x2="1" y2="1"><stop stop-color="#44304e"/><stop offset=".5" stop-color="#1e284a"/><stop offset="1" stop-color="#573456"/></linearGradient>
+    <linearGradient id="rainbow" x2="1"><stop stop-color="#7eacff"/><stop offset=".4" stop-color="#d891f6"/><stop offset=".75" stop-color="#fa91b5"/><stop offset="1" stop-color="#ffce66"/></linearGradient>
+    <radialGradient id="hub"><stop stop-color="#9876d0"/><stop offset=".65" stop-color="#286e98"/><stop offset="1" stop-color="#203851"/></radialGradient>
+    <radialGradient id="gold"><stop stop-color="#6f5436"/><stop offset="1" stop-color="#273149"/></radialGradient>
+    <pattern id="dots" width="15" height="15" patternUnits="userSpaceOnUse"><circle cx="4" cy="4" r="3.5" fill="#080e21"/></pattern>
+    <pattern id="blue-dots" width="18" height="18" patternUnits="userSpaceOnUse"><circle cx="5" cy="5" r="4" fill="#58a0ff" opacity=".38"/></pattern>
+    <filter id="glow" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="5"/></filter>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10Z" fill="#8acff2"/></marker>
+    <marker id="gold-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10Z" fill="#ffd079"/></marker>
+    <symbol id="document" viewBox="0 0 32 32"><path d="M8 4h11l6 6v18H8Z M19 4v7h6 M12 16h9 M12 21h9"/></symbol>
+    <symbol id="book" viewBox="0 0 32 32"><path d="M16 7c-4-3-8-3-13-2v21c5-1 9-1 13 2 4-3 8-3 13-2V5c-5-1-9-1-13 2Z M16 7v21"/></symbol>
+    <symbol id="hash" viewBox="0 0 32 32"><path d="M12 4 8 28 M24 4 20 28 M4 12h25 M3 22h25"/></symbol>
+    <symbol id="state" viewBox="0 0 32 32"><path d="m16 4 13 23H3Z M16 12v7 M16 23v1"/></symbol>
+    <symbol id="action" viewBox="0 0 32 32"><path d="m6 25 12-12a9 9 0 0 1 0-8l4 5 5-2c1 6-3 10-8 9L9 28Z"/></symbol>
+    <symbol id="history" viewBox="0 0 32 32"><path d="M6 12a12 12 0 1 1 0 10 M6 4v9h9 M16 9v8l5 3"/></symbol>
+    <symbol id="brain" viewBox="0 0 32 32"><path d="M16 5c-4-4-9-1-9 3-5 0-7 7-3 10-3 5 1 10 6 9 0 4 6 3 6-1Zm0 0c4-4 9-1 9 3 5 0 7 7 3 10 3 5-1 10-6 9 0 4-6 3-6-1Z M7 8l4 3 M4 18h5l3 4 M25 8l-4 3 M28 18h-5l-3 4 M16 12l-4 4 M16 17l4 4"/></symbol>
     <style>
-      text {font-family:Arial,Helvetica,sans-serif; fill:#183330}
-      .heading {font-size:28px; font-weight:700}
-      .label {font-size:21px; font-weight:700}
-      .body {font-size:19px}
-      .small {font-size:17px; fill:#526967}
-      .edge {fill:none; stroke:#526967; stroke-width:2.5; marker-end:url(#arrow)}
-      .learn {fill:none; stroke:#9d642d; stroke-width:2.5; marker-end:url(#learning-arrow)}
-      .node {fill:#fff; stroke:#b3c6bf; stroke-width:1.5}
+      text {font-family:'Segoe UI',Arial,sans-serif;fill:#f4f1ff}
+      .display {font-family:Georgia,'Times New Roman',serif;font-size:52px;font-weight:700;letter-spacing:-1px}
+      .heading {font-size:31px;font-weight:600;letter-spacing:-.5px}
+      .label {font-size:23px;font-weight:600}
+      .body {font-size:19px;fill:#e1d9ef}
+      .small {font-size:16px;fill:#cdc5df}
+      .micro {font-size:13px;fill:#b9c6e9;letter-spacing:.5px}
+      .edge {fill:none;stroke:#8acff2;stroke-width:2.4;marker-end:url(#arrow)}
+      .learn {fill:none;stroke:#ffd079;stroke-width:2.6;marker-end:url(#gold-arrow)}
+      .panel {stroke:#d0bbef;stroke-opacity:.4;stroke-width:1.2}
+      .icon {fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
     </style>
   </defs>
-  <rect width="1280" height="1010" rx="20" fill="#f7f9f5"/>
-  <text x="56" y="49" class="heading">Cognitive architecture for industrial knowledge retention</text>
-  <text x="56" y="79" class="small">Semantic and episodic knowledge graphs form the persistent memory core.</text>
 
-  <rect x="414" y="109" width="452" height="66" rx="12" fill="#fff" stroke="#b3c6bf"/>
-  <text x="640" y="137" class="label" text-anchor="middle">User interaction</text>
-  <text x="640" y="160" class="small" text-anchor="middle">React interface · FastAPI</text>
-  <path d="M640 176 V210" class="edge"/>
-  <rect x="366" y="215" width="548" height="83" rx="12" fill="#183f39"/>
-  <text x="640" y="248" text-anchor="middle" style="fill:#fff;font-size:23px;font-weight:700">Supervisor &amp; retrieval coordination</text>
-  <text x="640" y="276" text-anchor="middle" style="fill:#dfebe3;font-size:18px">Direct answer · semantic retrieval · episodic retrieval</text>
-  <rect x="61" y="215" width="263" height="83" rx="12" fill="#fff" stroke="#a8c3b6"/>
-  <text x="192" y="248" text-anchor="middle" class="label">Industrial sources</text>
-  <text x="192" y="276" text-anchor="middle" class="small">Manuals · procedures · guidance</text>
+  <!-- Printed comic frame, with quiet ink behind every label. -->
+  <rect width="1600" height="1200" rx="24" fill="url(#ink)"/>
+  <path d="M0 0H520L358 48 232 19 97 92 0 67Z" fill="#ffb94b"/>
+  <path d="M0 0H520L358 48 232 19 97 92 0 67Z" fill="url(#dots)"/>
+  <path d="M447 0H1073L980 38 744 14 640 46Z" fill="#ed699f"/>
+  <path d="M1046 0H1600V294L1557 248 1534 91 1360 51 1231 17Z" fill="#3a76e8"/>
+  <path d="M1255 0H1600V155L1541 87 1468 115 1488 47 1344 36Z" fill="#f8c759"/>
+  <path d="M1255 0H1600V155L1541 87 1468 115 1488 47 1344 36Z" fill="url(#dots)"/>
+  <path d="M0 838 73 744 31 965 90 904 41 1121 0 1200Z" fill="#ef88b8"/>
+  <path d="M0 1200V1103L95 1046 47 1131 208 1072 109 1200Z" fill="#ffcb61" stroke="#080e21" stroke-width="5"/>
+  <path d="M268 1200 408 1149 635 1200Z" fill="#f477aa"/>
+  <path d="M1064 1200 1276 1143 1476 1200Z" fill="#3e82ef"/>
+  <path d="M1528 928 1600 850V1200H1436Z" fill="#f776b7"/>
+  <path d="M1528 928 1600 850V1200H1436Z" fill="url(#dots)"/>
+  <rect x="0" y="91" width="57" height="526" fill="url(#blue-dots)"/>
+  <path d="M74 59H1509Q1549 59 1549 99V1147H78Q51 1147 51 1120V91Q51 59 74 59Z" fill="#111a30" fill-opacity=".78"/>
 
-  <rect x="40" y="337" width="1165" height="386" rx="18" fill="#eef3ed" stroke="#b3c6bf" stroke-width="1.5"/>
-  <text x="640" y="369" text-anchor="middle" class="label">Persistent knowledge graphs · Neo4j</text>
-  <path d="M192 298 V384" class="edge"/>
-  <path d="M480 298 V317 H309 V384" class="edge"/>
-  <path d="M800 298 V317 H900 V384" class="edge"/>
+  <!-- Shared flower mark and editorial typography from the interface. -->
+  <g transform="translate(95 93)">
+    <rect x="-5" y="-21" width="10" height="24" rx="5" fill="#dd90ec"/>
+    <rect x="-5" y="-21" width="10" height="24" rx="5" fill="#f7a5c9" transform="rotate(60)"/>
+    <rect x="-5" y="-21" width="10" height="24" rx="5" fill="#ffcc79" transform="rotate(120)"/>
+    <rect x="-5" y="-21" width="10" height="24" rx="5" fill="#95ddd3" transform="rotate(180)"/>
+    <rect x="-5" y="-21" width="10" height="24" rx="5" fill="#829dfb" transform="rotate(240)"/>
+    <rect x="-5" y="-21" width="10" height="24" rx="5" fill="#c18bef" transform="rotate(300)"/>
+  </g>
+  <text x="134" y="89" class="micro" style="fill:#e5d8f5;letter-spacing:2px">THE DATA PARASITE</text>
+  <text x="134" y="134" class="display">The cognitive memory architecture</text>
+  <text x="134" y="166" class="body">Industrial knowledge. Recorded experience. <tspan fill="#ecc0ef" font-style="italic">Brighter connections.</tspan></text>
 
-  <rect x="61" y="389" width="544" height="311" rx="14" fill="#fff" stroke="#a8c3b6"/>
-  <rect x="61" y="389" width="7" height="311" rx="3" fill="#216650"/>
-  <text x="86" y="425" class="heading">Semantic memory</text>
-  <text x="86" y="455" class="body">Documented facts, concepts and procedures</text>
-  <rect x="87" y="493" width="162" height="58" rx="9" class="node"/>
-  <text x="168" y="528" text-anchor="middle" class="label">Document</text>
-  <rect x="385" y="493" width="173" height="58" rx="9" class="node"/>
-  <text x="471" y="528" text-anchor="middle" class="label">Chunk</text>
-  <path d="M384 523 H251" class="edge"/>
-  <text x="317" y="508" text-anchor="middle" class="small">source</text>
-  <rect x="385" y="588" width="173" height="56" rx="9" class="node"/>
-  <text x="471" y="622" text-anchor="middle" class="label">Keywords</text>
-  <path d="M471 552 V584" class="edge"/>
-  <text x="90" y="607" class="body">Manuals · operating guidance</text>
-  <text x="90" y="635" class="body">Maintenance procedures</text>
-  <text x="87" y="676" class="small">Vector + keyword retrieval · document provenance</text>
+  <rect x="521" y="200" width="558" height="71" rx="19" fill="url(#glass)" class="panel"/>
+  <text x="800" y="230" text-anchor="middle" class="label">User interaction</text>
+  <text x="800" y="253" text-anchor="middle" class="small">React interface · FastAPI</text>
+  <path d="M800 272V300" class="edge"/>
 
-  <rect x="622" y="389" width="559" height="311" rx="14" fill="#fff" stroke="#d4c3a6"/>
-  <rect x="622" y="389" width="7" height="311" rx="3" fill="#a46d33"/>
-  <text x="647" y="425" class="heading">Episodic memory</text>
-  <text x="647" y="455" class="body">Recorded experience and changing knowledge</text>
-  <rect x="648" y="493" width="226" height="58" rx="9" class="node"/>
-  <text x="761" y="528" text-anchor="middle" class="label">Current experience</text>
-  <rect x="978" y="493" width="176" height="58" rx="9" class="node"/>
-  <text x="1066" y="528" text-anchor="middle" class="label">State / problem</text>
-  <path d="M875 523 H974" class="edge"/>
-  <rect x="978" y="588" width="176" height="56" rx="9" class="node"/>
-  <text x="1066" y="622" text-anchor="middle" class="label">Action</text>
-  <path d="M1066 552 V584" class="edge"/>
-  <text x="1131" y="575" text-anchor="middle" class="small">resolution</text>
-  <rect x="648" y="588" width="226" height="56" rx="9" fill="#f3eee5" stroke="#d4c3a6"/>
-  <text x="761" y="622" text-anchor="middle" class="label">Earlier version</text>
-  <path d="M761 587 V555" class="edge"/>
-  <text x="819" y="575" class="small">superseded by</text>
-  <text x="648" y="676" class="small">Machine · category · importance · time · source</text>
+  <rect x="73" y="305" width="354" height="99" rx="19" fill="url(#glass)" class="panel"/>
+  <text x="98" y="342" class="label">Industrial sources</text>
+  <text x="98" y="370" class="small">Manuals · procedures · guidance</text>
 
-  <path d="M306 723 V766 H432 V789" class="edge"/>
-  <path d="M903 723 V766 H846 V789" class="edge"/>
-  <text x="640" y="763" class="small" text-anchor="middle">Retrieved knowledge and experience</text>
-  <rect x="388" y="795" width="504" height="63" rx="12" fill="#fff" stroke="#b3c6bf"/>
-  <text x="640" y="833" text-anchor="middle" class="label">Answer using relevant memory evidence</text>
-  <path d="M640 858 V884" class="learn"/>
-  <rect x="350" y="890" width="579" height="64" rx="12" fill="#f3eee5" stroke="#d4c3a6"/>
-  <text x="640" y="917" text-anchor="middle" class="label">Learn relevant new user knowledge</text>
-  <text x="640" y="942" text-anchor="middle" class="small">Importance · categories · state/action pairs · versions</text>
-  <path d="M930 922 H1237 V642 H1184" class="learn"/>
-  <text x="1118" y="904" class="small" text-anchor="middle">Create / update</text>
-  <text x="640" y="991" class="small" text-anchor="middle">LangGraph orchestration · configurable model profiles · bounded context and runs · durable checkpoints</text>
+  <rect x="479" y="305" width="643" height="99" rx="20" fill="url(#glass)" stroke="url(#rainbow)" stroke-width="1.8"/>
+  <text x="800" y="345" text-anchor="middle" class="label">Supervisor &amp; retrieval coordination</text>
+  <text x="800" y="375" text-anchor="middle" class="small">Direct answer · semantic retrieval · episodic retrieval</text>
+  <rect x="1177" y="305" width="350" height="99" rx="19" fill="url(#glass)" class="panel"/>
+  <text x="1202" y="342" class="label">Model profiles</text>
+  <text x="1202" y="370" class="small">Reasoning roles · embedding profile</text>
+  <path d="M1177 355H1128" class="edge"/>
+
+  <!-- The graph core has the largest visual area. -->
+  <rect x="63" y="438" width="1464" height="456" rx="27" fill="#101b32" stroke="url(#rainbow)" stroke-width="1.5"/>
+  <rect x="555" y="454" width="490" height="28" rx="14" fill="#d9b1f219"/>
+  <text x="800" y="474" text-anchor="middle" class="small" style="fill:#e3c7f5;font-weight:600">Persistent knowledge graphs · Neo4j · memory core</text>
+  <path d="M250 405V457H290V493" class="edge"/>
+  <text x="91" y="469" class="micro">INGEST DOCUMENTS</text>
+  <path d="M668 405V425H422V493" class="edge"/>
+  <path d="M934 405V425H1165V493" class="edge"/>
+
+  <rect x="82" y="498" width="697" height="374" rx="24" fill="url(#semantic)" class="panel"/>
+  <rect x="101" y="523" width="5" height="42" rx="2.5" fill="#72ddf2"/>
+  <text x="123" y="549" class="heading">Semantic memory</text>
+  <text x="123" y="580" class="body">Documented facts, concepts &amp; procedures</text>
+
+  <path d="M396 668H242" class="edge"/>
+  <text x="317" y="646" text-anchor="middle" class="micro">FROM_DOCUMENT</text>
+  <path d="M480 668H611" class="edge"/>
+  <text x="547" y="646" text-anchor="middle" class="micro">HAS_KEYWORD</text>
+  <circle cx="438" cy="668" r="44" fill="#66d8ef" opacity=".16" filter="url(#glow)"/>
+  <circle cx="438" cy="668" r="42" fill="url(#hub)" stroke="#73dff2" stroke-width="2"/>
+  <use href="#book" x="420" y="650" width="36" height="36" class="icon" color="#f3e9ff"/>
+  <circle cx="205" cy="668" r="33" fill="#284366" stroke="#82b5ff" stroke-width="1.6"/>
+  <use href="#document" x="190" y="653" width="30" height="30" class="icon" color="#9fc4ff"/>
+  <circle cx="648" cy="668" r="33" fill="#3c2e62" stroke="#ba8bf0" stroke-width="1.6"/>
+  <use href="#hash" x="633" y="653" width="30" height="30" class="icon" color="#d4afff"/>
+  <text x="205" y="730" text-anchor="middle" class="body">Document</text>
+  <text x="438" y="745" text-anchor="middle" class="body">Chunk</text>
+  <text x="648" y="730" text-anchor="middle" class="body">Keywords</text>
+  <path d="M123 783H738" stroke="#c3d1ff" stroke-opacity=".18"/>
+  <text x="123" y="814" class="small">Source document · page · chunk order</text>
+  <text x="123" y="844" class="small" style="fill:#91d9ef">Vector + keyword retrieval · traceable evidence</text>
+
+  <rect x="801" y="498" width="707" height="374" rx="24" fill="url(#episodic)" class="panel"/>
+  <rect x="821" y="523" width="5" height="42" rx="2.5" fill="#eca6dc"/>
+  <text x="843" y="549" class="heading">Episodic memory</text>
+  <text x="843" y="580" class="body">Recorded experience &amp; changing knowledge</text>
+
+  <path d="M1165 650 1328 631" class="edge"/>
+  <text x="1234" y="624" text-anchor="middle" class="micro">HAS_STATE</text>
+  <path d="M1365 666V729" class="edge"/>
+  <text x="1381" y="705" class="micro">RESOLVED_BY</text>
+  <path d="M960 752 1080 688" class="edge"/>
+  <text x="1003" y="716" text-anchor="middle" class="micro" style="fill:#f3b0da">SUPERSEDED_BY</text>
+  <circle cx="1120" cy="665" r="47" fill="#d38cfa" opacity=".2" filter="url(#glow)"/>
+  <circle cx="1120" cy="665" r="44" fill="url(#hub)" stroke="#c697f9" stroke-width="2"/>
+  <use href="#brain" x="1102" y="647" width="36" height="36" class="icon" color="#f4e7ff"/>
+  <circle cx="1365" cy="632" r="31" fill="url(#gold)" stroke="#e9c366" stroke-width="1.6"/>
+  <use href="#state" x="1351" y="618" width="28" height="28" class="icon" color="#f4d98b"/>
+  <circle cx="1365" cy="765" r="31" fill="#23504e" stroke="#6cdfb6" stroke-width="1.6"/>
+  <use href="#action" x="1351" y="751" width="28" height="28" class="icon" color="#88ebc9"/>
+  <circle cx="926" cy="767" r="31" fill="#57335a" stroke="#e69bce" stroke-width="1.6"/>
+  <use href="#history" x="912" y="753" width="28" height="28" class="icon" color="#f1b5de"/>
+  <text x="1120" y="739" text-anchor="middle" class="body">Current experience</text>
+  <text x="1314" y="682" text-anchor="end" class="small">State / problem</text>
+  <text x="1365" y="817" text-anchor="middle" class="small">Action / resolution</text>
+  <text x="926" y="817" text-anchor="middle" class="small">Earlier version</text>
+  <text x="843" y="851" class="small">Machine · category · keywords · importance · time · source</text>
+
+  <path d="M414 895V918H656V943" class="edge"/>
+  <path d="M1154 895V918H944V943" class="edge"/>
+  <text x="800" y="926" text-anchor="middle" class="micro">RETRIEVED EVIDENCE</text>
+  <rect x="510" y="948" width="580" height="73" rx="21" fill="url(#glass)" stroke="#93cde1" stroke-opacity=".65"/>
+  <text x="800" y="978" text-anchor="middle" class="label">Answer using relevant memory evidence</text>
+  <text x="800" y="1003" text-anchor="middle" class="small">Documented knowledge + recorded experience</text>
+  <path d="M800 1022V1050" class="learn"/>
+  <rect x="510" y="1057" width="580" height="78" rx="21" fill="url(#glass)" stroke="#ffd079" stroke-opacity=".75"/>
+  <text x="800" y="1089" text-anchor="middle" class="label">Learn relevant new user knowledge</text>
+  <text x="800" y="1117" text-anchor="middle" class="small">Importance · categories · state/action pairs · versions</text>
+  <path d="M1091 1096H1552V767H1513" class="learn"/>
+  <text x="1317" y="1082" text-anchor="middle" class="micro" style="fill:#ffda95">CREATE / UPDATE</text>
+  <text x="1317" y="1120" text-anchor="middle" class="small">Keep earlier versions.</text>
+
+  <rect x="243" y="1155" width="1114" height="28" rx="14" fill="#1b2743"/>
+  <text x="800" y="1175" text-anchor="middle" class="small">LangGraph orchestration · bounded context, steps, tokens &amp; time · durable checkpoints</text>
 </svg>
