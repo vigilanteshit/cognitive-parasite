@@ -42,7 +42,7 @@ test('real browser source ingestion, streamed answer, memory and execution inspe
   page.on('console', message => { if (['error', 'warning'].includes(message.type())) errors.push(message.text()); });
   await page.setViewportSize({ width: 1440, height: 900 });
   await mockWorkbench(page); await page.goto('/');
-  await expect(page.getByText('Every conversation')).toBeVisible();
+  await expect(page.getByRole('heading', { name: /Good ideas have/ })).toBeVisible();
   await page.screenshot({ path: 'test-results/workbench-desktop.png', fullPage: true });
   await page.getByRole('button', { name: 'Add source', exact: true }).click();
   await expect(page.getByRole('textbox', { name: 'Source title' })).toBeFocused();
@@ -58,9 +58,10 @@ test('real browser source ingestion, streamed answer, memory and execution inspe
   await page.getByRole('textbox', { name: 'Message', exact: true }).fill('Explain semantic and episodic memory');
   await page.getByRole('button', { name: 'Send message' }).click();
   await expect(page.getByText('Semantic memory stores facts. Episodic memory records experience.')).toHaveCount(1);
+  await page.getByRole('button', { name: 'Open research inspector' }).click();
   await expect(page.getByText('Study excerpt', { exact: true })).toBeVisible();
   await page.getByRole('tab', { name: 'Memory' }).click();
-  await expect(page.getByText('The user studies cognitive memory.')).toBeVisible();
+  await expect(page.locator('.memory-item p').filter({ hasText: 'The user studies cognitive memory.' })).toBeVisible();
   await page.getByRole('button', { name: 'Episodic', exact: true }).click();
   await expect(page.getByText('No episodic memory yet')).toBeVisible();
   await page.getByRole('tab', { name: 'Execution' }).click();
@@ -90,7 +91,7 @@ for (const width of [320, 768, 1024, 1440]) {
     }
     if (width < 768) {
       await page.getByRole('button', { name: 'Open sessions' }).click();
-      await expect(page.getByRole('button', { name: 'New session' })).toBeVisible();
+      await expect(page.getByRole('button', { name: 'New chat' })).toBeVisible();
       await page.getByRole('button', { name: 'Close sessions', exact: true }).last().click();
     }
     await page.screenshot({ path: `test-results/workbench-${width}.png`, fullPage: true });

@@ -41,7 +41,7 @@ describe('research workbench', () => {
   it('identifies demo mode and presents an honest empty workspace', async () => {
     render(<App />);
     expect(await screen.findByText('Deterministic demo')).toBeInTheDocument();
-    expect(screen.getByRole('heading', { name: /Every conversation/ })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /Good ideas have/ })).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Send message' })).toBeDisabled();
   });
   it('updates mode labels when a live model is selected despite the demo server default', async () => {
@@ -68,6 +68,7 @@ describe('research workbench', () => {
       connection.emit({ type: 'token', text: 'I will remember your topic.' }, 3);
     });
     expect(screen.getByText('I will remember your topic.')).toBeInTheDocument();
+    await user.click(screen.getByRole('button', { name: 'Open research inspector' }));
     expect(screen.getByText('Research note')).toBeInTheDocument();
     saved = { ...saved, messages: [...saved.messages, { role: 'assistant', content: 'I will remember your topic.' }] };
     await act(async () => connection.emit({ type: 'done', status: 'completed' }, 4));

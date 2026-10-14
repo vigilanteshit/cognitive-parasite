@@ -6,7 +6,7 @@ test('real backend persists learned memory and retrieves an ingested source', as
   await page.setViewportSize({ width: 1440, height: 900 });
   await page.goto('/');
   const createdResponse = page.waitForResponse(response => response.url().endsWith('/api/sessions') && response.request().method() === 'POST');
-  await page.getByRole('button', { name: /New session/ }).click();
+  await page.getByRole('button', { name: /New chat/ }).click();
   const createdSession = await (await createdResponse).json();
   await page.getByRole('button', { name: 'Add source', exact: true }).click();
   await page.getByRole('textbox', { name: 'Source title' }).fill('Synthetic pump manual');
@@ -22,6 +22,7 @@ test('real backend persists learned memory and retrieves an ingested source', as
   const secondDone = page.waitForResponse(response => new URL(response.url()).pathname === `/api/sessions/${createdSession.id}` && response.request().method() === 'GET');
   await page.getByRole('button', { name: 'Send message' }).click();
   expect((await (await secondDone).json()).runs.at(-1).status).toBe('completed');
+  await page.getByRole('button', { name: 'Open research inspector' }).click();
   await page.getByRole('tab', { name: /^Memory/ }).click();
   await expect(page.locator('.memory-item p').filter({ hasText: 'I prefer green tea.' })).toBeVisible({ timeout: 20000 });
   await page.screenshot({ path: 'test-results/live-workbench-desktop.png', fullPage: true });
