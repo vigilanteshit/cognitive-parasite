@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="1010" viewBox="0 0 1280 1010" role="img" aria-labelledby="title description">
+  <title id="title">Cognitive architecture for industrial knowledge retention</title>
+  <desc id="description">A supervisor retrieves evidence from two Neo4j knowledge graphs. Semantic memory connects document chunks, documents and keywords. Episodic memory connects experiences, states, actions and successive versions. Answers use retrieved evidence; the learning pipeline scores and categorizes new user knowledge and writes it to episodic memory. Model profiles and bounded execution support the workflow.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#526967"/></marker>
+    <marker id="learning-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M 0 0 L 10 5 L 0 10 z" fill="#9d642d"/></marker>
+    <style>
+      text {font-family:Arial,Helvetica,sans-serif; fill:#183330}
+      .heading {font-size:28px; font-weight:700}
+      .label {font-size:21px; font-weight:700}
+      .body {font-size:19px}
+      .small {font-size:17px; fill:#526967}
+      .edge {fill:none; stroke:#526967; stroke-width:2.5; marker-end:url(#arrow)}
+      .learn {fill:none; stroke:#9d642d; stroke-width:2.5; marker-end:url(#learning-arrow)}
+      .node {fill:#fff; stroke:#b3c6bf; stroke-width:1.5}
+    </style>
+  </defs>
+  <rect width="1280" height="1010" rx="20" fill="#f7f9f5"/>
+  <text x="56" y="49" class="heading">Cognitive architecture for industrial knowledge retention</text>
+  <text x="56" y="79" class="small">Semantic and episodic knowledge graphs form the persistent memory core.</text>
+
+  <rect x="414" y="109" width="452" height="66" rx="12" fill="#fff" stroke="#b3c6bf"/>
+  <text x="640" y="137" class="label" text-anchor="middle">User interaction</text>
+  <text x="640" y="160" class="small" text-anchor="middle">React interface · FastAPI</text>
+  <path d="M640 176 V210" class="edge"/>
+  <rect x="366" y="215" width="548" height="83" rx="12" fill="#183f39"/>
+  <text x="640" y="248" text-anchor="middle" style="fill:#fff;font-size:23px;font-weight:700">Supervisor &amp; retrieval coordination</text>
+  <text x="640" y="276" text-anchor="middle" style="fill:#dfebe3;font-size:18px">Direct answer · semantic retrieval · episodic retrieval</text>
+  <rect x="61" y="215" width="263" height="83" rx="12" fill="#fff" stroke="#a8c3b6"/>
+  <text x="192" y="248" text-anchor="middle" class="label">Industrial sources</text>
+  <text x="192" y="276" text-anchor="middle" class="small">Manuals · procedures · guidance</text>
+
+  <rect x="40" y="337" width="1165" height="386" rx="18" fill="#eef3ed" stroke="#b3c6bf" stroke-width="1.5"/>
+  <text x="640" y="369" text-anchor="middle" class="label">Persistent knowledge graphs · Neo4j</text>
+  <path d="M192 298 V384" class="edge"/>
+  <path d="M480 298 V317 H309 V384" class="edge"/>
+  <path d="M800 298 V317 H900 V384" class="edge"/>
+
+  <rect x="61" y="389" width="544" height="311" rx="14" fill="#fff" stroke="#a8c3b6"/>
+  <rect x="61" y="389" width="7" height="311" rx="3" fill="#216650"/>
+  <text x="86" y="425" class="heading">Semantic memory</text>
+  <text x="86" y="455" class="body">Documented facts, concepts and procedures</text>
+  <rect x="87" y="493" width="162" height="58" rx="9" class="node"/>
+  <text x="168" y="528" text-anchor="middle" class="label">Document</text>
+  <rect x="385" y="493" width="173" height="58" rx="9" class="node"/>
+  <text x="471" y="528" text-anchor="middle" class="label">Chunk</text>
+  <path d="M384 523 H251" class="edge"/>
+  <text x="317" y="508" text-anchor="middle" class="small">source</text>
+  <rect x="385" y="588" width="173" height="56" rx="9" class="node"/>
+  <text x="471" y="622" text-anchor="middle" class="label">Keywords</text>
+  <path d="M471 552 V584" class="edge"/>
+  <text x="90" y="607" class="body">Manuals · operating guidance</text>
+  <text x="90" y="635" class="body">Maintenance procedures</text>
+  <text x="87" y="676" class="small">Vector + keyword retrieval · document provenance</text>
+
+  <rect x="622" y="389" width="559" height="311" rx="14" fill="#fff" stroke="#d4c3a6"/>
+  <rect x="622" y="389" width="7" height="311" rx="3" fill="#a46d33"/>
+  <text x="647" y="425" class="heading">Episodic memory</text>
+  <text x="647" y="455" class="body">Recorded experience and changing knowledge</text>
+  <rect x="648" y="493" width="226" height="58" rx="9" class="node"/>
+  <text x="761" y="528" text-anchor="middle" class="label">Current experience</text>
+  <rect x="978" y="493" width="176" height="58" rx="9" class="node"/>
+  <text x="1066" y="528" text-anchor="middle" class="label">State / problem</text>
+  <path d="M875 523 H974" class="edge"/>
+  <rect x="978" y="588" width="176" height="56" rx="9" class="node"/>
+  <text x="1066" y="622" text-anchor="middle" class="label">Action</text>
+  <path d="M1066 552 V584" class="edge"/>
+  <text x="1131" y="575" text-anchor="middle" class="small">resolution</text>
+  <rect x="648" y="588" width="226" height="56" rx="9" fill="#f3eee5" stroke="#d4c3a6"/>
+  <text x="761" y="622" text-anchor="middle" class="label">Earlier version</text>
+  <path d="M761 587 V555" class="edge"/>
+  <text x="819" y="575" class="small">superseded by</text>
+  <text x="648" y="676" class="small">Machine · category · importance · time · source</text>
+
+  <path d="M306 723 V766 H432 V789" class="edge"/>
+  <path d="M903 723 V766 H846 V789" class="edge"/>
+  <text x="640" y="763" class="small" text-anchor="middle">Retrieved knowledge and experience</text>
+  <rect x="388" y="795" width="504" height="63" rx="12" fill="#fff" stroke="#b3c6bf"/>
+  <text x="640" y="833" text-anchor="middle" class="label">Answer using relevant memory evidence</text>
+  <path d="M640 858 V884" class="learn"/>
+  <rect x="350" y="890" width="579" height="64" rx="12" fill="#f3eee5" stroke="#d4c3a6"/>
+  <text x="640" y="917" text-anchor="middle" class="label">Learn relevant new user knowledge</text>
+  <text x="640" y="942" text-anchor="middle" class="small">Importance · categories · state/action pairs · versions</text>
+  <path d="M930 922 H1237 V642 H1184" class="learn"/>
+  <text x="1118" y="904" class="small" text-anchor="middle">Create / update</text>
+  <text x="640" y="991" class="small" text-anchor="middle">LangGraph orchestration · configurable model profiles · bounded context and runs · durable checkpoints</text>
+</svg>
