@@ -64,6 +64,26 @@ jobs:
         run: npx playwright install --with-deps chromium
       - name: Browser contract tests
         run: npx playwright test
+      - uses: astral-sh/setup-uv@bec219d24cd3e171d82865faccec33120bb574f4
+      - name: Install API for integrated browser test
+        working-directory: .
+        run: uv sync --locked
+      - name: Start disposable local API
+        working-directory: .
+        env:
+          PARASITE_DATA_DIR: .local/e2e
+        run: |
+          mkdir -p .local
+          uv run data-parasite serve --port 8000 > .local/e2e-server.log 2>&1 &
+          for attempt in {1..30}; do
+            curl --fail --silent http://127.0.0.1:8000/api/health && break
+            sleep 1
+          done
+          curl --fail --silent http://127.0.0.1:8000/api/health
+      - name: Real API and browser integration
+        env:
+          PARASITE_E2E_BASE_URL: http://127.0.0.1:8000
+        run: npx playwright test
 
   neo4j:
     name: Live Neo4j integration

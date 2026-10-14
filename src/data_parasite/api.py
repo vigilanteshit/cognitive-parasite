@@ -57,8 +57,6 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         for event in cancellations.values():
             event.set()
         running = list(tasks.values())
-        for task in running:
-            task.cancel()
         if running:
             await asyncio.gather(*running, return_exceptions=True)
 
@@ -356,7 +354,6 @@ def create_app(settings: Settings | None = None) -> FastAPI:
         run = run_or_404(run_id)
         if run_id in cancellations:
             cancellations[run_id].set()
-            tasks[run_id].cancel()
         return {"id": run_id, "status": "cancelling" if run_id in tasks else run["status"]}
 
     @app.post("/api/runs/{run_id}/resume", status_code=202)
