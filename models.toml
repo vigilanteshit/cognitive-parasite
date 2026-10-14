@@ -1,0 +1,29 @@
+# Profiles describe capabilities, not automatic promises about arbitrary models.
+# Verify these limits against your deployment before changing them.
+[roles]
+answer = "demo"
+supervisor = "demo"
+extraction = "demo"
+summary = "demo"
+
+[profiles.openai]
+provider = "openai"
+model = "gpt-4.1-mini"
+label = "OpenAI (configured)"
+context_window = 32768
+max_output_tokens = 2048
+temperature_supported = true
+
+[profiles.azure]
+provider = "azure"
+model = "replace-with-your-deployment-name"
+label = "Azure (configured deployment)"
+context_window = 32768
+max_output_tokens = 2048
+
+[profiles.anthropic]
+provider = "anthropic"
+model = "claude-sonnet-4-5"
+label = "Anthropic (configured)"
+context_window = 32768
+max_output_tokens = 2048

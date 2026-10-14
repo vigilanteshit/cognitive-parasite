@@ -1,0 +1,87 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  python:
+    name: Python
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.12"
+      - uses: astral-sh/setup-uv@bec219d24cd3e171d82865faccec33120bb574f4 # v10.1.0
+      - name: Install locked Python dependencies
+        run: uv sync --locked
+      - name: Lint
+        run: uv run ruff check src tests scripts
+      - name: Test
+        run: uv run pytest
+      - name: Audit public source tree
+        run: uv run python scripts/audit_publication.py --root . --history
+      - name: Synthetic retrieval regression
+        run: uv run python scripts/evaluate.py
+      - name: Build package
+        run: uv build
+      - name: Audit Python dependencies
+        run: uv run pip-audit --skip-editable
+
+  frontend:
+    name: Frontend
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+      - name: Install locked Node dependencies
+        run: npm ci
+      - name: Test
+        run: npm test -- --run
+      - name: Build
+        run: npm run build
+      - name: Audit production Node dependencies
+        run: npm audit --omit=dev
+      - name: Install browser
+        run: npx playwright install --with-deps chromium
+      - name: Browser contract tests
+        run: npx playwright test
+
+  neo4j:
+    name: Live Neo4j integration
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    services:
+      neo4j:
+        image: neo4j:5.26-community
+        env:
+          NEO4J_AUTH: neo4j/example-disposable-ci
+        ports:
+          - 7687:7687
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+      - uses: astral-sh/setup-uv@bec219d24cd3e171d82865faccec33120bb574f4
+      - run: uv sync --locked
+      - name: Verify real graph and vector operations
+        env:
+          PARASITE_NEO4J_TEST_URI: bolt://localhost:7687
+          PARASITE_NEO4J_TEST_PASSWORD: example-disposable-ci
+        run: uv run python scripts/verify_neo4j.py

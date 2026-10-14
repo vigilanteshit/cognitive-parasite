@@ -1,0 +1,10 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+type: software
+title: "The Data Parasite"
+authors:
+  - name: "vigilanteshit"
+version: 0.2.0
+date-released: 2026-10-14
+license: MIT
+repository-code: "https://github.com/vigilanteshit/cognitive-parasite"
